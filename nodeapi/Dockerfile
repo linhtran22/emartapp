@@ -1,8 +1,10 @@
+# Build the artifact
 FROM node:14 AS nodeapi-build
 WORKDIR /usr/src/app
 COPY ./ ./nodeapi/
 RUN cd nodeapi && npm install
 
+# Use the artifact
 FROM node:14
 WORKDIR /usr/src/app/
 COPY --from=nodeapi-build /usr/src/app/nodeapi/ ./
